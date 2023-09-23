@@ -29,8 +29,7 @@ jobs:
         wget https://github.com/HeaTTheatR/KivyMD-data/raw/master/install-kivy-buildozer-dependencies.sh
         chmod +x install-kivy-buildozer-dependencies.sh
         ./install-kivy-buildozer-dependencies.sh
-        pip install kivymd
-        pip install g4f
+        pip install kivymd g4f cython
         sudo apt install default-jre
     - name: Build APK
       run: |
