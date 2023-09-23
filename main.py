@@ -1,4 +1,5 @@
 import kivy
+import g4f
 from kivy.app import App
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -32,7 +33,15 @@ class MyApp(App):
         text = self.text_input.text
 
         # Вызываем метод create() из g4f.ChatCompletion с переданным текстом
-        result = g4f.ChatCompletion.create(text)
+        result = g4f.ChatCompletion.create(
+          model='gpt-4',
+          provider=g4f.Provider.Aichat,
+          messages=[{
+              "role":
+              "user",
+              "content":
+              f'{text}'
+          }])
 
         # Обновляем текст в Label
         self.label.text = result
