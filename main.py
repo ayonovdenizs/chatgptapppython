@@ -8,10 +8,10 @@ from kivymd.uix.textfield import MDTextField
 class MyApp(App):
     def build(self):
         # Создаем виджет Label
-        self.label = Label(text='Привет, мир!')
+        self.label = Label(text='Добро пожаловать в ChatGPTapp!')
 
         # Создаем виджет MDTextField
-        self.text_input = MDTextField(hint_text='Введите текст')
+        self.text_input = MDTextField(hint_text='Введи запрос')
 
         # Создаем кнопку "Отправить"
         self.button = Button(text='Отправить')
