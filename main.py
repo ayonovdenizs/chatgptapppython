@@ -1,17 +1,17 @@
 import kivy
 from kivy.app import App
 from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.textfield import MDTextField
 
 class MyApp(App):
     def build(self):
         # Создаем виджет Label
         self.label = Label(text='Привет, мир!')
 
-        # Создаем виджет TextInput
-        self.text_input = TextInput(text='Введите текст')
+        # Создаем виджет MDTextField
+        self.text_input = MDTextField(hint_text='Введите текст')
 
         # Создаем кнопку "Отправить"
         self.button = Button(text='Отправить')
