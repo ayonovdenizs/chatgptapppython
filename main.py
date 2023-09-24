@@ -1,27 +1,35 @@
-from kivy.lang import Builder
-
 from kivymd.app import MDApp
+from kivymd.uix.label import MDLabel
+from kivymd.uix.textfield import MDTextField
+from kivymd.uix.button import MDFlatButton
+from kivymd.uix.boxlayout import MDBoxLayout
 
+class MyApp(MDApp):
+    def build(self, *args):
+        # Create MDLabel widget
+        self.label = MDLabel(text='Привет, мир!')
 
-KV = """
-Screen:
+        # Create MDTextField widget
+        self.text_input = MDTextField(hint_text='Введите текст')
 
-    MDToolbar:
-        title: "My firt app"
-        elevation: 10
-        md_bg_color: app.theme_cls.primary_color
-        left_action_items: [["menu", lambda x: x]]
-        pos_hint: {"top": 1}
+        # Create MDFlatButton widget
+        self.button = MDFlatButton(text='Отправить')
+        self.button.bind(on_release=self.on_button_press)
 
-    MDRaisedButton:
-        text: "Hello World"
-        pos_hint: {"center_x": .5, "center_y": .5}
-"""
+        # Create MDBoxLayout for vertical arrangement of widgets
+        vbox = MDBoxLayout(orientation='vertical')
 
+        # Add widgets to the layout
+        vbox.add_widget(self.label)
+        vbox.add_widget(self.text_input)
+        vbox.add_widget(self.button)
 
-class HelloWorld(MDApp):
-    def build(self):
-        return Builder.load_string(KV)
+        return vbox
 
+    def on_button_press(self, instance):
+        # Get text from the input field
+        text = self.text_input.text
+        self.label.text = text
 
-HelloWorld().run()
+if __name__ == '__main__':
+    MyApp().run()
