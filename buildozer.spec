@@ -20,7 +20,7 @@ version = 0.0.1
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy==1.11.1,kivymd,g4f
+requirements = python3,kivy==1.11.1,kivymd,revChatGPT
 
 # (str) Supported orientation (one of landscape, sensorLandscape, portrait or all)
 orientation = portrait
