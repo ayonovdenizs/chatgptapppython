@@ -31,20 +31,7 @@ class MyApp(App):
     def on_button_press(self, instance):
         # Получаем текст из поля ввода
         text = self.text_input.text
-
-        # Вызываем метод create() из g4f.ChatCompletion с переданным текстом
-        result = g4f.ChatCompletion.create(
-          model='gpt-4',
-          provider=g4f.Provider.Aichat,
-          messages=[{
-              "role":
-              "user",
-              "content":
-              f'{text}'
-          }])
-
-        # Обновляем текст в Label
-        self.label.text = result
+        self.label.text = text
 
 if __name__ == '__main__':
     MyApp().run()
