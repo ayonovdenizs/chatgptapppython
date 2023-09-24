@@ -30,10 +30,9 @@ jobs:
         sudo add-apt-repository universe
         sudo apt-get update && sudo apt-get upgrade
         sudo apt-get install libc6:i386 libncurses5:i386 libstdc++6:i386 lib32z1 libbz2-1.0:i386
-        pip install cython==0.20
+        pip install cython
         wget https://github.com/HeaTTheatR/KivyMD-data/raw/master/install-kivy-buildozer-dependencies.sh
         chmod +x install-kivy-buildozer-dependencies.sh
-        
         ./install-kivy-buildozer-dependencies.sh
         pip install kivymd
         sudo apt install default-jre
