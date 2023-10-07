@@ -10,7 +10,6 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
 import g4f
 import sqlite3
-import openai
 
 class chatgptapp(MDApp):
     def build(self, *args):
