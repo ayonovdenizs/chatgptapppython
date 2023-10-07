@@ -35,7 +35,7 @@ jobs:
         chmod +x install-kivy-buildozer-dependencies.sh
         ./install-kivy-buildozer-dependencies.sh
         python -m pip install "kivy[full]"
-        pip install kivymd
+        pip install kivymd g4f==0.1.5.4
         sudo apt install default-jre
     - name: Build APK
       run: |
