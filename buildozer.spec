@@ -37,7 +37,7 @@ version = 0.2.android_beta
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,g4f
+requirements = python3,kivy,g4f,kivymd
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes

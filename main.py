@@ -19,7 +19,7 @@ class chatgptapp(MDApp):
             ['delete', lambda x: self.clear_db(x)]
         ]
         self.message_box = MDList()
-        self.conn = sqlite3.connect('donate.db', check_same_thread=False)
+        self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
         self.c.execute('CREATE TABLE IF NOT EXISTS message (msg TEXT)')
         self.conn.commit()
