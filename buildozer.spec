@@ -1,10 +1,10 @@
 [app]
 
 # (str) Title of your application
-title = ChatGPT app (alpha)
+title = Serena
 
 # (str) Package name
-package.name = chatgptapp_alpha
+package.name = serena_llama2
 
 # (str) Package domain (needed for android/ios packaging)
 package.domain = ru.ayden
@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #source.exclude_patterns = license,images/*/*.jpg
 
 # (str) Application versioning (method 1)
-version = 0.2.android_beta
+version = 0.1
 
 # (str) Application versioning (method 2)
 # version.regex = __version__ = ['"](.*)['"]
@@ -37,7 +37,7 @@ version = 0.2.android_beta
 
 # (list) Application requirements
 # comma separated e.g. requirements = sqlite3,kivy
-requirements = python3,kivy,g4f,kivymd
+requirements = python3,kivy,gradio_client,kivymd
 
 # (str) Custom source folders for requirements
 # Sets custom source for any requirements with recipes

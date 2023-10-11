@@ -9,26 +9,28 @@ from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
 import g4f
+from gradio_client import Client
 import sqlite3
 
 class chatgptapp(MDApp):
     def build(self, *args):
         # Create MDLabel widget
-        self.toolbar = MDTopAppBar(title='ChatGPT app [alpha]')
+        self.toolbar = MDTopAppBar(title='Серена ассистент')
         self.toolbar.right_action_items = [
             ['delete', lambda x: self.clear_db(x)]
         ]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
+        self.api = Client("https://ysharma-explore-llamav2-with-tgi.hf.space/")
         self.c.execute('CREATE TABLE IF NOT EXISTS message (msg TEXT)')
         self.conn.commit()
-        self.version = "0.0.2.alpha"
-        self.label = MDLabel(text=f'Добро пожаловать в ChatGPTapp! Версия: {self.version}')
+        self.version = "alpha_build_1"
+        self.label = MDLabel(text=f'Добро пожаловать в Llama by ayonovdenizs! Версия: {self.version}')
         self.toolbar.pos_hint = {'top': 1}
 
         # Create MDTextField widget
-        self.text_input = MDTextField(hint_text='Введите запрос:')
+        self.text_input = MDTextField(hint_text='Написать Серене')
 
         # Create MDFlatButton widget
         self.button = MDFlatButton(text='Отправить')
@@ -82,27 +84,27 @@ class chatgptapp(MDApp):
             self.msg_list.append(self.msg)
         req = None
         try:
-            req = g4f.ChatCompletion.create(model='gpt-3.5-turbo',
-                                                messages=[{
-                    "role":
-                    "user",
-                    "content":
-                    f'{self.msg_list}'
-                }])
+            req = self.api.predict(
+				self.user_message,	# str in 'parameter_28' Textbox component
+				"You are an android assistant girl, your name is Serena and you speak Russian. Always answer in Russian.",	# str in 'Optional system prompt' Textbox component
+				0.5,	# int | float (numeric value between 0.0 and 1.0)
+				4096,	# int | float (numeric value between 0 and 4096)
+				0.9,	# int | float (numeric value between 0.0 and 1)
+				2,	# int | float (numeric value between 1.0 and 2.0)
+				api_name="/chat")
             self.label.text = ''
             self.message_box.add_widget(
                     TwoLineListItem(
                         text=req,
-                        secondary_text='ChatGPT'
+                        secondary_text='Серена'
                     )
                 )
         except Exception as e:
             self.label.text = ''
-            print(f'[INFO   ] [Base        ] ChatGPT error: {str(e)}')
             self.message_box.add_widget(
                     TwoLineListItem(
                         text=str(e),
-                        secondary_text='ChatGPT получил ошибку'
+                        secondary_text='Серена не смогла выполнить запрос'
                     )
                 )
         self.c.execute(
