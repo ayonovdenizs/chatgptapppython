@@ -18,7 +18,7 @@ class chatgptapp(MDApp):
         self.toolbar = MDTopAppBar(title='Серена ассистент')
         self.toolbar.right_action_items = [
             ['delete', lambda x: self.clear_db(x),
-             '']
+             'download_box', lambda x: self.update(x)]
         ]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
@@ -115,6 +115,9 @@ class chatgptapp(MDApp):
             },
         )
         self.conn.commit()
+
+    def update(self, instance):
+        pass
 
 if __name__ == '__main__':
     chatgptapp().run()

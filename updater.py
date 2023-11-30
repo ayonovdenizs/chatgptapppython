@@ -19,6 +19,7 @@ def check_version(version):
             return True
         else:
             print('Updater: У вас последняя версия.')
+            return False
 
     except requests.exceptions.RequestException as e:
         print(f'Updater: Произошла ошибка при запросе к GitHub: {e}')
