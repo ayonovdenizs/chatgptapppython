@@ -9,24 +9,25 @@ from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
 import g4f
-from gradio_client import Client
 import sqlite3
+from updater import check_version
 
 class chatgptapp(MDApp):
     def build(self, *args):
         # Create MDLabel widget
         self.toolbar = MDTopAppBar(title='Серена ассистент')
         self.toolbar.right_action_items = [
-            ['delete', lambda x: self.clear_db(x)]
+            ['delete', lambda x: self.clear_db(x),
+             '']
         ]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
-        self.api = Client("https://ysharma-explore-llamav2-with-tgi.hf.space/")
         self.c.execute('CREATE TABLE IF NOT EXISTS message (msg TEXT)')
         self.conn.commit()
-        self.version = "alpha_build_1"
-        self.label = MDLabel(text=f'Добро пожаловать в Llama by ayonovdenizs! Версия: {self.version}')
+        self.version = "1.0.0_beta"
+        self.need_update = check_version(self.version)
+        self.label = MDLabel(text=f'Добро пожаловать в ChatGPT App by ayonovdenizs! Версия: {self.version}')
         self.toolbar.pos_hint = {'top': 1}
 
         # Create MDTextField widget
