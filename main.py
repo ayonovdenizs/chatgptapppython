@@ -15,11 +15,11 @@ from updater import check_version
 class chatgptapp(MDApp):
     def build(self, *args):
         # Create MDLabel widget
-        self.toolbar = MDTopAppBar(title='Серена ассистент')
+        self.toolbar = MDTopAppBar(title='ChatGPT')
         self.toolbar.right_action_items = [
-            ['delete', lambda x: self.clear_db(x),
-             'download_box', lambda x: self.update(x)]
-        ]
+            ['delete', lambda x: self.clear_db(x)],
+            ['download-box-outline', lambda x: self.update(x)]
+]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
