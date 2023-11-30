@@ -8,6 +8,7 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.dialog import MDDialog
 import g4f
 import sqlite3
 from updater import check_version
@@ -26,9 +27,9 @@ class chatgptapp(MDApp):
         self.c.execute('CREATE TABLE IF NOT EXISTS message (msg TEXT)')
         self.conn.commit()
         self.version = "1.0.0_beta"
-        self.need_update = check_version(self.version)
         self.label = MDLabel(text=f'Добро пожаловать в ChatGPT App by ayonovdenizs! Версия: {self.version}')
         self.toolbar.pos_hint = {'top': 1}
+        self.dialog = None
 
         # Create MDTextField widget
         self.text_input = MDTextField(hint_text='Написать Серене')
@@ -117,7 +118,33 @@ class chatgptapp(MDApp):
         self.conn.commit()
 
     def update(self, instance):
-        pass
+        try:
+            need_update = check_version(self.version)
+            if need_update == True:
+                self.dialog_show('Необходимо обновление! Скачайте из Github.')
+            else:
+                self.dialog_show('Вы на последней версии.')
+        except Exception as e:
+            self.dialog_show(f'Произошла ошибка:\n{e}')
+        
+        
+    def dialog_show(self, text):
+        if not self.dialog:
+            self.dialog = MDDialog(
+            title=text,
+            buttons=[
+                MDFlatButton(
+                text="OK",
+                theme_text_color="Custom",
+                text_color=self.theme_cls.primary_color,
+            )
+        ]
+    )  
+        self.dialog.open(animation=True)
+
+    def dialog_close(self):
+        self.dialog.close()
+        self.dialog = None
 
 if __name__ == '__main__':
     chatgptapp().run()
