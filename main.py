@@ -8,9 +8,9 @@ from kivymd.uix.label import MDLabel
 from kivymd.uix.textfield import MDTextField
 from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.dialog import MDDialog
 import g4f
 import sqlite3
+
 
 class chatgptapp(MDApp):
     def build(self, *args):
@@ -82,19 +82,13 @@ class chatgptapp(MDApp):
             self.msg_list.append(self.msg)
         req = None
         try:
-            req = self.api.predict(
-				self.user_message,	# str in 'parameter_28' Textbox component
-				"You are an android assistant girl, your name is Serena and you speak Russian. Always answer in Russian.",	# str in 'Optional system prompt' Textbox component
-				0.5,	# int | float (numeric value between 0.0 and 1.0)
-				4096,	# int | float (numeric value between 0 and 4096)
-				0.9,	# int | float (numeric value between 0.0 and 1)
-				2,	# int | float (numeric value between 1.0 and 2.0)
-				api_name="/chat")
+            req = g4f.ChatCompletion.create(model=g4f.models.default,
+                                            messages=[{"role": "user", "content": self.text_input.text}])
             self.label.text = ''
             self.message_box.add_widget(
                     TwoLineListItem(
                         text=req,
-                        secondary_text='Серена'
+                        secondary_text='ChatGPT'
                     )
                 )
         except Exception as e:
@@ -102,7 +96,7 @@ class chatgptapp(MDApp):
             self.message_box.add_widget(
                     TwoLineListItem(
                         text=str(e),
-                        secondary_text='Серена не смогла выполнить запрос'
+                        secondary_text='ChatGPT не смог выполнить запрос'
                     )
                 )
         self.c.execute(
