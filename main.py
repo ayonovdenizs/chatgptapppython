@@ -18,9 +18,7 @@ class chatgptapp(MDApp):
         # Create MDLabel widget
         self.toolbar = MDTopAppBar(title='ChatGPT')
         self.toolbar.right_action_items = [
-            ['delete', lambda x: self.clear_db(x)],
-            ['download-box-outline', lambda x: self.update(x)]
-]
+            ['delete', lambda x: self.clear_db(x)]]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
@@ -116,35 +114,6 @@ class chatgptapp(MDApp):
             },
         )
         self.conn.commit()
-
-    def update(self, instance):
-        try:
-            need_update = check_version(self.version)
-            if need_update == True:
-                self.dialog_show('Необходимо обновление! Скачайте из Github.')
-            else:
-                self.dialog_show('Вы на последней версии.')
-        except Exception as e:
-            self.dialog_show(f'Произошла ошибка:\n{e}')
-        
-        
-    def dialog_show(self, text):
-        if not self.dialog:
-            self.dialog = MDDialog(
-            title=text,
-            buttons=[
-                MDFlatButton(
-                text="OK",
-                theme_text_color="Custom",
-                text_color=self.theme_cls.primary_color,
-            )
-        ]
-    )  
-        self.dialog.open(animation=True)
-
-    def dialog_close(self):
-        self.dialog.close()
-        self.dialog = None
 
 if __name__ == '__main__':
     chatgptapp().run()
