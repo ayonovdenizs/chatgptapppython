@@ -14,7 +14,6 @@ import sqlite3
 
 class chatgptapp(MDApp):
     def build(self, *args):
-        # Create MDLabel widget
         self.toolbar = MDTopAppBar(title='ChatGPT')
         self.toolbar.right_action_items = [
             ['delete', lambda x: self.clear_db(x)]]
