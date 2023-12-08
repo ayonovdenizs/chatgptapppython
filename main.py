@@ -11,7 +11,6 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.dialog import MDDialog
 import g4f
 import sqlite3
-from updater import check_version
 
 class chatgptapp(MDApp):
     def build(self, *args):
