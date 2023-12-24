@@ -165,3 +165,7 @@ cython_debug/
 #.idea/
 messages.db
 *.db
+backup/app.exe
+output/update.exe
+app.exe
+update.py

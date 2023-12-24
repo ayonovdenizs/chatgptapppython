@@ -10,13 +10,15 @@ from kivymd.uix.button import MDFlatButton
 from kivymd.uix.boxlayout import MDBoxLayout
 import g4f
 import sqlite3
+import sys
 
 
 class chatgptapp(MDApp):
     def build(self, *args):
         self.toolbar = MDTopAppBar(title='ChatGPT')
         self.toolbar.right_action_items = [
-            ['delete', lambda x: self.clear_db(x)]]
+            ['delete', lambda x: self.clear_db(x)],
+            ['update', lambda x: self.update(x)]]
         self.message_box = MDList()
         self.conn = sqlite3.connect('messages.db', check_same_thread=False)
         self.c = self.conn.cursor()
@@ -106,6 +108,10 @@ class chatgptapp(MDApp):
             },
         )
         self.conn.commit()
+
+    def update(self, instance):
+        sys.exit("update.exe")
+        exit()
 
 if __name__ == '__main__':
     chatgptapp().run()
